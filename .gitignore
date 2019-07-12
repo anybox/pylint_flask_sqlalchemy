@@ -1,0 +1,13 @@
+# python
+.mypy_cache
+.vscode
+*.pyc
+.venv
+*.egg-info
+*.egg
+.eggs
+dist/
+build/
+htmlcov/
+.coverage
+report.xml
