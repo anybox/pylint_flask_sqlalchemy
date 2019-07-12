@@ -11,3 +11,5 @@ build/
 htmlcov/
 .coverage
 report.xml
+venv
+*.db
