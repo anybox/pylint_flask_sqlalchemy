@@ -7,8 +7,10 @@ stages:
 
 quality:
   stage: check
-  script:
+  before_script:
+    - pip install -e .
     - pip install black pylint mypy
+  script:
     - pylint pylint_flask_sqlalchemy && mypy pylint_flask_sqlalchemy && black --diff pylint_flask_sqlalchemy
   allow_failure: false
   except:
@@ -17,9 +19,9 @@ quality:
 test:
   stage: test
   before_script:
-    - python setup.py develop
+    - pip install -e .
   script:
-    - pytest
+    - pylint tests/example.py --load-plugins pylint_flask_sqlalchemy
   except:
     - schedules
   artifacts:
