@@ -4,7 +4,7 @@ Pylint plugin
 
 from astroid import MANAGER, ClassDef
 
-VERSION = "0.0.2"
+VERSION = "0.0.3"
 
 
 def register(linter):  # pylint: disable=unused-argument
