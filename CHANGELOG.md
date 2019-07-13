@@ -3,24 +3,19 @@
 
 ## Current version
 
-### New
+### Changes
 
-* Project logo.
+* Update readme.
+
+
+## 0.0.2 (2019-07-13)
+
+### New
 
 * First draft of the plugin.
 
-### Changes
-
-* Test runner.
-
-* Now requires Flask-SQLAlchemy >= 2.
-
 ### Fixes
 
-* Setup requires astroid.
-
-* Contournement import astroid lors du setup.
-
-* Requirements.
+* Packaging.
 
 
