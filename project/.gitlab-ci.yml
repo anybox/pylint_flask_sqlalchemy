@@ -24,15 +24,6 @@ test:
     - pylint tests/example.py --load-plugins pylint_flask_sqlalchemy
   except:
     - schedules
-  artifacts:
-    name: "coverage-${CI_COMMIT_REF_NAME}"
-    when: always
-    untracked: true
-    expire_in: 1 week
-    paths:
-      - htmlcov
-    reports:
-      junit: report.xml
 
 pypi:
   stage: release
