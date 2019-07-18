@@ -3,6 +3,13 @@
 
 ## Current version
 
+### New
+
+* Handle scoped_session has no * member.
+
+
+## 0.0.3 (2019-07-13)
+
 ### Changes
 
 * Update readme.

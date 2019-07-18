@@ -29,6 +29,10 @@ class User(db.Model):
 
     def __repr__(self):
         return "<User %r>" % self.username
+
+user = User(username="test")
+db.session.add(user)
+db.session.commit()
 ```
 
 Without the plugin: `pylint app.py`
@@ -38,9 +42,11 @@ app.py:11:9: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
 app.py:11:19: E1101: Instance of 'SQLAlchemy' has no 'Integer' member (no-member)
 app.py:12:15: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
 app.py:12:25: E1101: Instance of 'SQLAlchemy' has no 'String' member (no-member)
+app.py:19:0: E1101: Instance of 'scoped_session' has no 'add' member (no-member)
+app.py:20:0: E1101: Instance of 'scoped_session' has no 'commit' member (no-member)
 
 ----------------------------------------------------------------------
-Your code has been rated at -10.00/10 (previous run: 10.00/10, -20.00)
+Your code has been rated at -13.08/10 (previous run: 10.00/10, -23.08)
 ```
 
 😓
@@ -49,7 +55,7 @@ With pylint_flask_sqlalchemy: `pylint --load-plugins pylint_flask_sqlalchemy app
 
 ```sh
 ----------------------------------------------------------------------
-Your code has been rated at 10.00/10 (previous run: -10.00/10, +20.00)
+Your code has been rated at 10.00/10 (previous run: -13.08/10, +23.08)
 ```
 
 🥳
