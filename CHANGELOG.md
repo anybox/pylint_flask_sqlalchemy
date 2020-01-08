@@ -7,6 +7,13 @@
 
 * Handle scoped_session has no * member.
 
+
+## 0.1.0 (2019-07-18)
+
+### New
+
+* Handle scoped_session has no * member.
+
 * Handle scoped_session has no * member.
 
 ### Changes

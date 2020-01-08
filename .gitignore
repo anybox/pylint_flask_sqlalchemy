@@ -13,3 +13,4 @@ htmlcov/
 report.xml
 venv
 *.db
+/.gtm/
