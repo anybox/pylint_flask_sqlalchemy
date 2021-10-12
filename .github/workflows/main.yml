@@ -37,6 +37,7 @@ jobs:
           python-version: 3.9
       - name: Install package
         run: |
+          pip install wheel
           pip install -e .
       - name: Run pylint on example.py
         run: |
