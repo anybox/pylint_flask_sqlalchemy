@@ -12,7 +12,7 @@ class Group(db.Model):
     name = db.Column(db.String(80), unique=True, nullable=False)
 
     def __repr__(self):
-        return "<User %r>" % self.username
+        return f"<Group {self.name}>"
 
 
 class User(db.Model):
@@ -21,7 +21,7 @@ class User(db.Model):
     group = db.relationship(Group)
 
     def __repr__(self):
-        return "<User %r>" % self.username
+        return f"<User {self.username}>"
 
 
 user = User(username="test")
