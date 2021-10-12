@@ -1,0 +1,42 @@
+name: CI
+
+on: [push]
+
+jobs:
+  lint:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install package
+        run: |
+          pip install -e .
+      - name: Pylint
+        run: |
+          pip install pylint
+          pylint pylint_flask_sqlalchemy
+      - name: Mypy
+        run: |
+          pip install mypy
+          mypy pylint_flask_sqlalchemy
+      - name: Black
+        run: |
+          pip install black
+          black --diff pylint_flask_sqlalchemy
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.9
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.9
+      - name: Install package
+        run: |
+          pip install -e .
+      - name: Run pylint on example.py
+        run: |
+          pylint tests/example.py --load-plugins pylint_flask_sqlalchemy
