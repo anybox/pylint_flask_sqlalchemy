@@ -1,13 +1,18 @@
 # pylint_flask_sqlalchemy
 
+[![Downloads](https://pepy.tech/badge/pylint-flask-sqlalchemy/month)](https://pepy.tech/project/pylint-flask-sqlalchemy)
+[![Workflow](https://github.com/anybox/pylint_flask_sqlalchemy/actions/workflows/main.yml/badge.svg)](https://github.com/anybox/pylint_flask_sqlalchemy/actions)
+[![PyPI](https://badge.fury.io/py/pylint-flask-sqlalchemy.svg)](https://pypi.org/project/pylint-flask-sqlalchemy/)
+
 ## About
 
-pylint_flask_sqlalchemy is a [Pylint](https://www.pylint.org/) plugin for improving code
-analysis with [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com).
+`pylint_flask_sqlalchemy` is a [Pylint](https://www.pylint.org/) to improve static code
+analysis of [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com) based
+projects.
 
 ## Usage
 
-Using a simple flask app
+Using a simple flask app:
 
 ```python
 """app.py"""
@@ -25,7 +30,7 @@ class Group(db.Model):
     name = db.Column(db.String(80), unique=True, nullable=False)
 
     def __repr__(self):
-        return "<User %r>" % self.username
+        return f"<Group {self.name}>"
 
 
 class User(db.Model):
@@ -34,7 +39,7 @@ class User(db.Model):
     group = db.relationship(Group)
 
     def __repr__(self):
-        return "<User %r>" % self.username
+        return f"<User {self.username}>"
 
 user = User(username="test")
 db.session.add(user)
@@ -77,4 +82,4 @@ Your code has been rated at 10.00/10 (previous run: -13.08/10, +23.08)
 pip install pylint_flask_sqlalchemy
 ```
 
-and tell pylint to `--load-plugins pylint_flask_sqlalchemy` when you launch it. 
+and tell pylint to `--load-plugins pylint_flask_sqlalchemy`.
