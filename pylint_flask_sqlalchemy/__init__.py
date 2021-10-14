@@ -9,7 +9,7 @@ VERSION = "0.2.0"
 def register(linter: PyLinter):
     """Plugin registration."""
 
-def transform(cls: object) -> None:
+def transform(cls) -> None:
     """Mimics Flask-SQLAlchemy's _include_sqlalchemy ."""
     if cls.name == "SQLAlchemy":
         import sqlalchemy
