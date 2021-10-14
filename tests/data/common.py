@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring,too-few-public-methods,invalid-name
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
@@ -22,8 +21,3 @@ class User(db.Model):
 
     def __repr__(self):
         return f"<User {self.username}>"
-
-
-user = User(username="test")
-db.session.add(user)
-db.session.commit()

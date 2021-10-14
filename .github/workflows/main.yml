@@ -1,6 +1,10 @@
 name: CI
 
-on: [push, pull_request]
+on:
+  push:
+    branches:
+    - master
+  pull_request:
 
 jobs:
   lint:
@@ -11,23 +15,41 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.6
-      - name: Install package
-        run: |
-          pip install wheel
-          pip install -e .
+      - name: Install pylint_flask_sqlalchemy[dev]
+        run: pip install .[dev]
       - name: Pylint
-        run: |
-          pip install pylint
-          pylint pylint_flask_sqlalchemy
+        run: pylint pylint_flask_sqlalchemy
       - name: Mypy
-        run: |
-          pip install mypy
-          mypy pylint_flask_sqlalchemy
+        run: mypy pylint_flask_sqlalchemy
       - name: Black
+        run: black --diff pylint_flask_sqlalchemy
+
+  unit-tests:
+    runs-on: ubuntu-latest
+    strategy:
+      matrix:
+        python: ["3.6", "3.7", "3.8", "3.9"]
+        flask_sqlalchemy: ["2.4.4", "2.5.1"]
+        sqlalchemy: ["1.3.24", "1.4.25"]
+        exclude:
+          # sqlalchemy 1.4 support comes in flask_sqlalchemy 2.5
+          - flask_sqlalchemy: "2.4.4"
+            sqlalchemy: "1.4.25"
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python
+        uses: actions/setup-python@v1
+        with:
+          python-version: ${{ matrix.python }}
+      - name: Install pylint_flask_sqlalchemy[dev]
         run: |
-          pip install black
-          black --diff pylint_flask_sqlalchemy
-  test:
+          pip install -e .[dev]
+          pip install --upgrade flask_sqlalchemy==${{ matrix.flask_sqlalchemy }}
+          pip install --upgrade sqlalchemy==${{ matrix.sqlalchemy }}
+      - name: Run tests
+        run: pytest
+
+  integration-test:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v2
@@ -35,10 +57,12 @@ jobs:
         uses: actions/setup-python@v1
         with:
           python-version: 3.6
-      - name: Install package
+      - name: Install pylint_flask_sqlalchemy
         run: |
-          pip install wheel
-          pip install -e .
-      - name: Run pylint on example.py
+          pip install  -e .
+      - name: Run pylint with pylint_flask_sqlalchemy
         run: |
-          pylint tests/example.py --load-plugins pylint_flask_sqlalchemy
+          pylint --load-plugins pylint_flask_sqlalchemy \
+            tests/data/scoped_session.py \
+            tests/data/sqlalchemy_column.py \
+            tests/data/sqlalchemy_types.py
