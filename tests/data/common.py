@@ -1,4 +1,3 @@
-# pylint: disable=missing-docstring,too-few-public-methods,invalid-name
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 
