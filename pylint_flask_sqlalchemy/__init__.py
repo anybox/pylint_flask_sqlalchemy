@@ -28,5 +28,4 @@ def transform(cls):
         for key in Session.public_methods:
             cls.locals[key] = [ClassDef(key, None)]
 
-
 MANAGER.register_transform(ClassDef, transform)
