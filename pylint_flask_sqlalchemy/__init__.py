@@ -1,6 +1,4 @@
-"""
-Pylint plugin
-"""
+"""Pylint plugin."""
 
 from astroid import MANAGER, ClassDef
 
@@ -8,13 +6,11 @@ VERSION = "0.2.0"
 
 
 def register(linter):  # pylint: disable=unused-argument
-    """Plugin registration"""
+    """Plugin registration."""
 
 
 def transform(cls):
-    """
-    Mimics Flask-SQLAlchemy's _include_sqlalchemy
-    """
+    """Mimics Flask-SQLAlchemy's _include_sqlalchemy."""
     if cls.name == "SQLAlchemy":
         import sqlalchemy  # pylint: disable=import-outside-toplevel
         import sqlalchemy.orm  # pylint: disable=import-outside-toplevel
