@@ -60,6 +60,9 @@ jobs:
       - name: Install pylint_flask_sqlalchemy
         run: |
           pip install  -e .
-      - name: Run pylint with pylint_flask_sqlalchemy on example.py
+      - name: Run pylint with pylint_flask_sqlalchemy
         run: |
-          pylint tests/example.py --load-plugins pylint_flask_sqlalchemy
+          pylint --load-plugins pylint_flask_sqlalchemy \
+            tests/data/scoped_session.py \
+            tests/data/sqlalchemy_column.py \
+            tests/data/sqlalchemy_types.py
