@@ -43,9 +43,9 @@ jobs:
           python-version: ${{ matrix.python }}
       - name: Install pylint_flask_sqlalchemy[dev]
         run: |
-          pip install .[dev]
-          pip install --upgrade flask_sqlalchemy:${{ matrix.flask_sqlalchemy }}
-          pip install --upgrade sqlalchemy:${{ matrix.sqlalchemy }}
+          pip install -e .[dev]
+          pip install --upgrade flask_sqlalchemy==${{ matrix.flask_sqlalchemy }}
+          pip install --upgrade sqlalchemy==${{ matrix.sqlalchemy }}
       - name: Run tests
         run: pytest
 
@@ -58,7 +58,8 @@ jobs:
         with:
           python-version: 3.6
       - name: Install pylint_flask_sqlalchemy
-        run: pip install  .
+        run: |
+          pip install  -e .
       - name: Run pylint with pylint_flask_sqlalchemy on example.py
         run: |
           pylint tests/example.py --load-plugins pylint_flask_sqlalchemy
