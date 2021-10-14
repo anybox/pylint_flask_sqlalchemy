@@ -1,4 +1,5 @@
-from tests.data.common import db, User
+"""Test sqlalchemy session."""
+from .common import db, User
 
 user = User(username="test")
 db.session.add(user)
