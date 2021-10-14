@@ -12,31 +12,16 @@ E5 = "E1101: Instance of 'scoped_session' has no 'commit' member (no-member)"
 PARAMS = ["tests/example.py", "--errors-only", "--exit-zero"]
 
 
+@pytest.mark.parametrize("with_plugin", [True, False])
 @pytest.mark.parametrize("error", [E1, E2, E3, E4, E5])
-def test_without_plugin(capsys, error):
+def test_error(capsys, with_plugin, error):
+    if with_plugin:
+        PARAMS.extend(["--load-plugins", "pylint_flask_sqlalchemy"])
     try:
         Run(PARAMS)
     except SystemExit:
         pass
     captured = capsys.readouterr()
     for message in captured.out.split("\n"):
-        assert error in message
-
-
-@pytest.mark.parametrize("error", [E1, E2, E3, E4, E5])
-def test_with_plugin(capsys, error):
-    try:
-        Run(
-            [
-                "tests/example.py",
-                "--errors-only",
-                "--exit-zero",
-                "--load-plugins",
-                "pylint_flask_sqlalchemy",
-            ]
-        )
-    except SystemExit:
-        pass
-    captured = capsys.readouterr()
-    for message in captured.out.split("\n"):
-        assert error not in message
+        assert error in message != with_plugin, captured.out
+1
