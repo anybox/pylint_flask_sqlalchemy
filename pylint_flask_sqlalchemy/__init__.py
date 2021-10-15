@@ -54,7 +54,7 @@ def transform(node: NodeNG) -> None:
     elif node.name == "scoped_session":
         from sqlalchemy.orm import Session
 
-        for key in dir(Session):
+        for key in sorted(dir(Session), reverse=True):
             # `query` is in fact a proxy to `query_property`
             if key == "query":
                 node.locals[key] = [ClassDef(key, None), node.locals["query_property"]]
