@@ -17,6 +17,7 @@
 * Main repo is now on GitHub
 * Cleanup
 * Better tests (thanks @j0ak)
+* switch to an MIT license
 
 ## 0.2.0 (2020-01-14)
 
