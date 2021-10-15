@@ -22,7 +22,7 @@ def sort_module_keys(key: str):
     return -1 if key in FLASK_SQLALCHEMY_WRAPS else 1
 
 
-def transform(node: NodeNG) -> NodeNG:
+def transform(node: NodeNG) -> None:
     """Make pylint understand FlaskSQLAlchemy proxies and wrappers.
 
     Note : it _looks_ like astroid transforms are run in some kind of try/except
@@ -51,8 +51,7 @@ def transform(node: NodeNG) -> NodeNG:
                         ClassDef(key, None),
                         node.locals["Query"]
                     ]
-        return node
-    if node.name == "scoped_session":
+    elif node.name == "scoped_session":
         from sqlalchemy.orm import Session
 
         for key in dir(Session):
@@ -61,8 +60,6 @@ def transform(node: NodeNG) -> NodeNG:
                 node.locals[key] = [ClassDef(key, None), node.locals["query_property"]]
             else:
                 node.locals[key] = [ClassDef(key, None)]
-        return node
-    return node
 
 
 MANAGER.register_transform(ClassDef, transform)
