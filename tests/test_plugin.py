@@ -1,8 +1,6 @@
-"""Tests"""
+"""Tests."""
 import pytest
 from pylint import epylint as lint
-
-# pylint: disable=missing-docstring
 
 E1 = ("E1101", "Instance of 'SQLAlchemy' has no 'Column' member")
 E2 = ("E1101", "Instance of 'SQLAlchemy' has no 'Integer' member")
@@ -10,7 +8,7 @@ E3 = ("E1101", "Instance of 'SQLAlchemy' has no 'String' member")
 E4 = ("E1101", "Instance of 'scoped_session' has no 'add' member")
 E5 = ("E1101", "Instance of 'scoped_session' has no 'commit' member")
 E6 = ("E1101", "Instance of 'relationship' has no 'filter' member")
-
+E7 = ("E1101", "Instance of 'query' has no 'outerjoin' member")
 
 @pytest.mark.parametrize("with_plugin", [True, False])
 @pytest.mark.parametrize(
@@ -41,7 +39,7 @@ def test_plugin(with_plugin, filename, errors):
 @pytest.mark.parametrize(
     "filename, errors",
     [
-        ("sqlalchemy_relationship", [E6])
+        ("sqlalchemy_relationship", [E6, E7])
     ],
 )
 def test_error_with_flask_sqlalchemy_wraps(filename, errors):
