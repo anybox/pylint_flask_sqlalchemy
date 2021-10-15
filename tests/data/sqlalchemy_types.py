@@ -1,4 +1,4 @@
-"""Test sqlalchemy column."""
+"""Test sqlalchemy types."""
 from .common import db
 
 

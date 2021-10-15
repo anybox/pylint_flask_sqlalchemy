@@ -1,8 +1,8 @@
-# pylint_flask_sqlalchemy
+# Pylint Flask SQLAlchemy
 
-[![Downloads](https://pepy.tech/badge/pylint-flask-sqlalchemy/month)](https://pepy.tech/project/pylint-flask-sqlalchemy)
-[![Workflow](https://github.com/anybox/pylint_flask_sqlalchemy/actions/workflows/main.yml/badge.svg)](https://github.com/anybox/pylint_flask_sqlalchemy/actions)
 [![PyPI](https://badge.fury.io/py/pylint-flask-sqlalchemy.svg)](https://pypi.org/project/pylint-flask-sqlalchemy/)
+[![Workflow](https://github.com/anybox/pylint_flask_sqlalchemy/actions/workflows/main.yml/badge.svg)](https://github.com/anybox/pylint_flask_sqlalchemy/actions)
+[![Downloads](https://pepy.tech/badge/pylint-flask-sqlalchemy/month)](https://pepy.tech/project/pylint-flask-sqlalchemy)
 
 ## About
 
@@ -10,9 +10,19 @@
 analysis of [Flask-SQLAlchemy](https://flask-sqlalchemy.palletsprojects.com) based
 projects.
 
+`pylint_flask_sqlalchemy` is now hosted on GitHub: https://github.com/anybox/pylint_flask_sqlalchemy
+
+## Installation 
+
+```sh
+pip install pylint_flask_sqlalchemy
+```
+
+And tell Pylint to `--load-plugins pylint_flask_sqlalchemy`.
+
 ## Usage
 
-Using a simple flask app:
+Here's a simple flask application:
 
 ```python
 """app.py"""
@@ -45,9 +55,11 @@ db.session.add(user)
 db.session.commit()
 ```
 
-Without the plugin: `pylint app.py`
+### Without the plugin 😓
 
-```
+```sh
+pylint app.py
+
 app.py:11:9: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
 app.py:11:19: E1101: Instance of 'SQLAlchemy' has no 'Integer' member (no-member)
 app.py:12:11: E1101: Instance of 'SQLAlchemy' has no 'Column' member (no-member)
@@ -64,21 +76,13 @@ app.py:29:0: E1101: Instance of 'scoped_session' has no 'commit' member (no-memb
 Your code has been rated at -18.95/10 (previous run: 10.00/10, -28.95)
 ```
 
-😓
 
-With pylint_flask_sqlalchemy: `pylint --load-plugins pylint_flask_sqlalchemy app.py`
+
+### With pylint_flask_sqlalchemy 🥳
 
 ```sh
+pylint --load-plugins pylint_flask_sqlalchemy app.py
+
 ----------------------------------------------------------------------
 Your code has been rated at 10.00/10 (previous run: -13.08/10, +23.08)
 ```
-
-🥳
-
-## Installation 
-
-```
-pip install pylint_flask_sqlalchemy
-```
-
-and tell pylint to `--load-plugins pylint_flask_sqlalchemy`.

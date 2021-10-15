@@ -28,7 +28,7 @@ jobs:
     runs-on: ubuntu-latest
     strategy:
       matrix:
-        python: ["3.6", "3.7", "3.8", "3.9"]
+        python: ["3.8", "3.9"]
         flask_sqlalchemy: ["2.4.4", "2.5.1"]
         sqlalchemy: ["1.3.24", "1.4.25"]
         exclude:
@@ -62,7 +62,4 @@ jobs:
           pip install  -e .
       - name: Run pylint with pylint_flask_sqlalchemy
         run: |
-          pylint --load-plugins pylint_flask_sqlalchemy \
-            tests/data/scoped_session.py \
-            tests/data/sqlalchemy_column.py \
-            tests/data/sqlalchemy_types.py
+          pylint --load-plugins pylint_flask_sqlalchemy *.py

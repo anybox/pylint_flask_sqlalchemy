@@ -5,13 +5,18 @@
 
 ### New
 
+* Minimum python version is now 3.6 as 3.5 is eol
+
+### Fix
+
+* Instance of 'relationship' has no 'filter' member
+* Instance of 'query' has no 'outerjoin' member
+
+### Changes
+
 * Main repo is now on GitHub
 * Cleanup
 * Better tests (thanks @j0ak)
-
-### Breaking
-
-* Minimum python version is 3.6 as 3.5 is eol
 
 ## 0.2.0 (2020-01-14)
 
