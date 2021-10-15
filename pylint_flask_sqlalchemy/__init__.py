@@ -11,7 +11,7 @@ FLASK_SQLALCHEMY_WRAPS = [
     "dynamic_loader",
 ]
 
-VERSION = "0.2.0"
+VERSION = "1.0.0"
 
 
 def register(linter: PyLinter):
@@ -23,7 +23,7 @@ def sort_module_keys(key: str):
 
 
 def transform(cls) -> None:
-    """Mimics Flask-SQLAlchemy's _include_sqlalchemy ."""
+    """Mimics Flask-SQLAlchemy's _include_sqlalchemy."""
     if cls.name == "SQLAlchemy":
         import sqlalchemy
         import sqlalchemy.orm
