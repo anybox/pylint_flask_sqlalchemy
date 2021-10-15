@@ -62,7 +62,4 @@ jobs:
           pip install  -e .
       - name: Run pylint with pylint_flask_sqlalchemy
         run: |
-          pylint --load-plugins pylint_flask_sqlalchemy \
-            tests/data/scoped_session.py \
-            tests/data/sqlalchemy_column.py \
-            tests/data/sqlalchemy_types.py
+          pylint --load-plugins pylint_flask_sqlalchemy *.py
