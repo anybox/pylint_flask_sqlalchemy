@@ -32,7 +32,7 @@ def transform(node: NodeNG) -> NodeNG:
     from sqlalchemy.orm import Session
     Session.foo
     ```
-    here, you would think it will raise an 
+    here, you would think it will raise an:
     `AttributeError: type object 'Session' has no attribute 'foo'`
     but... no. Instead it stops the transform and continue to the next node, so pylint
     does not raise an error, so you think your code (and ours) works, but it's not :-(
