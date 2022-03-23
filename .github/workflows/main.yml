@@ -78,3 +78,7 @@ jobs:
       - name: Run build
         run: |
           python -m build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: build-output
+          path: dist/
