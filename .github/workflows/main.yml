@@ -86,3 +86,6 @@ jobs:
         with:
           name: built_dist
           path: dist/*.whl
+      - name: Check wheel contents
+        run: |
+          python -m check_wheel_contents dist/*.whl
