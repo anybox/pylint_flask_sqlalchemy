@@ -86,6 +86,22 @@ jobs:
         with:
           name: built_dist
           path: dist/*.whl
-      - name: Check wheel contents
+  
+  check-wheel:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: built_dist
+          path: wheel.whl
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
+      - name: Install check_wheel_contents
         run: |
-          python -m check_wheel_contents dist/*.whl
+          pip install check_wheel_contents
+      - name: Run check_wheel_contents
+        run: |
+          python -m check_wheel_contents wheel.whl
