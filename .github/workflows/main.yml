@@ -80,5 +80,9 @@ jobs:
           python -m build
       - uses: actions/upload-artifact@v3
         with:
-          name: build-output
-          path: dist/
+          name: source_dist
+          path: dist/*.tar.gz
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built_dist
+          path: dist/*.whl
