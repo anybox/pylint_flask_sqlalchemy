@@ -63,3 +63,45 @@ jobs:
       - name: Run pylint with pylint_flask_sqlalchemy
         run: |
           pylint --load-plugins pylint_flask_sqlalchemy *.py
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
+      - name: Install build
+        run: |
+          pip install build
+      - name: Run build
+        run: |
+          python -m build
+      - uses: actions/upload-artifact@v3
+        with:
+          name: source_dist
+          path: dist/*.tar.gz
+      - uses: actions/upload-artifact@v3
+        with:
+          name: built_dist
+          path: dist/*.whl
+  
+  check-wheel:
+    needs: build
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/download-artifact@v2
+        with:
+          name: built_dist
+          path: wheel.whl
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
+      - name: Install check_wheel_contents
+        run: |
+          pip install check_wheel_contents
+      - name: Run check_wheel_contents
+        run: |
+          python -m check_wheel_contents wheel.whl
