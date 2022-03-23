@@ -63,3 +63,18 @@ jobs:
       - name: Run pylint with pylint_flask_sqlalchemy
         run: |
           pylint --load-plugins pylint_flask_sqlalchemy *.py
+  
+  build:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: Set up Python 3.6
+        uses: actions/setup-python@v1
+        with:
+          python-version: 3.6
+      - name: Install build
+        run: |
+          pip install build
+      - name: Run build
+        run: |
+          python -m build
